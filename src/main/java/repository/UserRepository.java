@@ -28,8 +28,8 @@ public class UserRepository {
     }
 
     public User login(String userName) throws SQLException {
-        String loginQuary = "SELECT * FROM users WHERE userName = ?";
-        PreparedStatement preparedStatement = connection.prepareStatement(loginQuary);
+        String loginQuery = "SELECT * FROM users WHERE userName = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(loginQuery);
         preparedStatement.setString(1,userName);
         ResultSet resultSet = preparedStatement.executeQuery();
         if (resultSet.next()){
@@ -44,5 +44,13 @@ public class UserRepository {
         }
         else
             return null;
+    }
+
+    public int updateFirstName(String firstName) throws SQLException {
+        String query = "UPDATE users SET firstName = ? WHERE id = 3";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setString(1,firstName);
+        int result = preparedStatement.executeUpdate();
+        return result;
     }
 }
