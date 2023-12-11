@@ -15,8 +15,7 @@ public class UserService {
     public UserService() throws SQLException {
     }
 
-    public void register() throws SQLException {
-        User user = new User(null,"zahra","lotfi","zlotfi","1380");
+    public void register(User user) throws SQLException {
         int result = userRepository.save(user);
         if (result != 0)
             System.out.println(user.getFirstName() + " successfully added to database");
@@ -24,32 +23,23 @@ public class UserService {
             System.out.println("OOps!:(");
     }
 
-    public void login() throws SQLException {
-        System.out.println("please enter your userName: ");
-        String userName = scanner.nextLine();
-
-        System.out.println("please enter your password: ");
-        String password = scanner.nextLine();
-
+    public User login(String userName) throws SQLException {
         User user = userRepository.login(userName);
-        if ((user != null) && user.getPassword().equals(password))
-            System.out.println("login successfully");
-        else
-            System.out.println("bad credentials");
+        return user;
     }
 
-    public void changeFirstName() throws SQLException {
+    public void changeFirstName(int id) throws SQLException {
         System.out.println("please enter your new firstName:");
         String firstName = scanner.nextLine();
-        int result = userRepository.updateFirstName(firstName);
+        int result = userRepository.updateFirstName(firstName,id);
         if (result != 0)
             System.out.println("successfully update to database");
         else
             System.out.println("OOps!:(");
     }
 
-    public void delete() throws SQLException {
-        int result = userRepository.delete(3);
+    public void delete(int id) throws SQLException {
+        int result = userRepository.delete(id);
         if (result != 0)
             System.out.println("successfully deleted from database");
         else
