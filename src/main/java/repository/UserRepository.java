@@ -46,10 +46,11 @@ public class UserRepository {
             return null;
     }
 
-    public int updateFirstName(String firstName) throws SQLException {
-        String query = "UPDATE users SET firstName = ? WHERE id = 3";
+    public int updateFirstName(String firstName, int id) throws SQLException {
+        String query = "UPDATE users SET firstName = ? WHERE id = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         preparedStatement.setString(1,firstName);
+        preparedStatement.setInt(2,id);
         int result = preparedStatement.executeUpdate();
         return result;
     }
