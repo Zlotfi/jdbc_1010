@@ -10,9 +10,10 @@ public class UserService {
 
     Scanner scanner = new Scanner(System.in);
 
-    private final UserRepository userRepository = new UserRepository();
+    private final UserRepository userRepository;
 
-    public UserService() throws SQLException {
+    public UserService(UserRepository userRepository){
+        this.userRepository = userRepository;
     }
 
     public void register(User user) throws SQLException {
