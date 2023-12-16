@@ -3,6 +3,7 @@ package menu;
 import model.User;
 import service.UserService;
 import utility.ApplicationContext;
+import utility.Validation;
 
 import java.sql.SQLException;
 import java.util.Scanner;
@@ -42,8 +43,15 @@ public class Menu {
         String userName = scanner.nextLine();
 
         System.out.println("Enter your password: ");
-        String password = scanner.nextLine();
-
+        String password = null;
+        boolean flag = true;
+        while (flag){
+            password = scanner.nextLine();
+            if (Validation.isValidPassword(password))
+                flag = false;
+            else
+                System.out.println("please enter a valid password");
+        }
         User user = new User(null, firstName, lastName, userName, password);
         userService.register(user);
     }
